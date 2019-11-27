@@ -31,6 +31,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <form method="post" th:action="@{/logout}">
+                        <input class="btn btn-success" type="submit" value="Salir"/>
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>
