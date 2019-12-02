@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    @Value("${thc-api.password.salt}")
+    @Value("${thc-web.password.salt}")
     private String salt;
 
     @Value("${backend.base.url}")
