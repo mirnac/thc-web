@@ -7,6 +7,8 @@ import com.treshermanas.thcweb.exception.DataNotFoundException;
 import com.treshermanas.thcweb.model.StockVerificationModel;
 import com.treshermanas.thcweb.services.stock.StockVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,9 +32,10 @@ public class StockVerificationController {
     public String showStockVerificationPage(Model model, @RequestParam(required = false) String product){
 
         try{
+
             StockVerification formBean = new StockVerification();
             formBean.setStartDate(Calendar.getInstance().getTime());
-            formBean.setUserName("mirnac");
+            formBean.setUserName(getUserName());
             model.addAttribute("stockVerification",formBean);
 
             //TODO: Hacer la consulta de depósitos por entidad y utilizar el primero en este punto.
@@ -47,6 +50,16 @@ public class StockVerificationController {
         return "stock/stock_verification.html";
     }
 
+    private String getUserName(){
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails)
+           return ((UserDetails)principal).getUsername();
+         else
+            return principal.toString();
+
+    }
     @RequestMapping(value = "/stock/start_verification", method = RequestMethod.POST)
     public String startVerification(@ModelAttribute StockVerification stockVerification, Model model){
 

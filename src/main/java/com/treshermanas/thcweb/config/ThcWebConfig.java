@@ -18,7 +18,6 @@ public class ThcWebConfig {
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
 
-       // RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory());
         RestTemplate restTemplate = builder.requestFactory(new ClientHttpRequestFactorySupplier()).errorHandler(new RestTemplateResponseErrorHandler()).build();
         restTemplate.setInterceptors(Collections.singletonList(new RequestResponseLoggingInterceptor()));
         return restTemplate;

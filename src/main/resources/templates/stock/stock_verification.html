@@ -53,7 +53,7 @@
       </button>
   </div>
   <div th:if="${stockVerification?.status == saved}" class="alert alert-success text-center" role="alert">
-      La verificación ha sido almacenada con éxito. Para iniciar una nueva verificación  <a href="#" class="alert-link">HAGA CLICK AQUÍ</a>
+      La verificación ha sido almacenada con éxito. Para iniciar una nueva verificación  <a href="#" th:href="@{/stock/stock_verification}" class="alert-link">HAGA CLICK AQUÍ</a>
   </div>
     <div class="title text-center">
         <h1 >Verificación de Stock</h1>
