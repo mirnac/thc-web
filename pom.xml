@@ -9,15 +9,35 @@
     </parent>
     <groupId>com.treshermanas</groupId>
     <artifactId>thc-web</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>thc-web</name>
     <description>Proyecto Web Tres Hermanas Comercial</description>
     <packaging>war</packaging>
 
     <properties>
-        <java.version>13</java.version>
+        <java.version>1.8</java.version>
+        <deploy-server>local</deploy-server>
+        <deploy-server-url>http://localhost:8080/manager/text</deploy-server-url>
+        <deploy-server-user>local</deploy-server-user>
+        <deploy-server-password>local</deploy-server-password>
     </properties>
-
+    <profiles>
+        <profile>
+            <id>AmazonProd</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>prod</value>
+                </property>
+            </activation>
+            <properties>
+                <deploy-server>AmazonProd</deploy-server>
+                <deploy-server-url>http://54.164.11.71:8080/manager/text</deploy-server-url>
+                <deploy-server-user>deploy</deploy-server-user>
+                <deploy-server-password>deploy</deploy-server-password>
+            </properties>
+        </profile>
+    </profiles>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -64,7 +84,21 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>${deploy-server-url}</url>
+                    <warFile>./target/${project.build.finalName}.war</warFile>
+                    <server>${deploy-server}</server>
+                    <username>${deploy-server-user}</username>
+                    <password>${deploy-server-password}</password>
+                    <path>/${project.build.finalName}</path>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -80,6 +114,6 @@
     </build>
     <scm>
         <developerConnection>scm:git:git@github.com:mirnac/thc-web.git</developerConnection>
-        <tag>thc-web-0.0.3</tag>
+        <tag>thc-web-0.0.2</tag>
     </scm>
 </project>
