@@ -27,7 +27,7 @@ public class StockVerificationController {
     @Autowired
     private StockVerificationService stockVerificationService;
 
-    @RequestMapping(path = {"","/", "index", "index.html", "stock_verification.html", "/stock/stock_verification", "/stock/stock_verification.html"},
+    @RequestMapping(path = {"stock_verification.html", "/stock/stock_verification", "/stock/stock_verification.html"},
     method = RequestMethod.GET)
     public String showStockVerificationPage(Model model, @RequestParam(required = false) String product){
 

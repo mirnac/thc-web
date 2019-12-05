@@ -20,6 +20,7 @@ public class ThcWebConfig {
 
         RestTemplate restTemplate = builder.requestFactory(new ClientHttpRequestFactorySupplier()).errorHandler(new RestTemplateResponseErrorHandler()).build();
         restTemplate.setInterceptors(Collections.singletonList(new RequestResponseLoggingInterceptor()));
+
         return restTemplate;
     }
 

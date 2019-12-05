@@ -15,30 +15,8 @@
     <title>Verificar Stock</title>
 </head>
 <body th:with="notStarted = ${T(com.treshermanas.thcweb.beans.products.VerificationStatus).NOT_STARTED}, started =${T(com.treshermanas.thcweb.beans.products.VerificationStatus).STARTED}, saved = ${T(com.treshermanas.thcweb.beans.products.VerificationStatus).SAVED}">
-  <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="main-navigation">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <form method="post" th:action="@{/logout}">
-                        <input class="btn btn-success" type="submit" value="Salir"/>
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </nav>
+
+  <header th:insert="fragments.html :: header"> </header>
 
   <div th:if="${stockVerification?.status==notStarted}" class="alert alert-warning alert-dismissible fade show text-center" role="alert">
       Existen <strong th:text="${stockVerification.pendingVerificationCount}">34</strong> productos pendientes de verificación de stock.
@@ -161,9 +139,10 @@
 
       </script>
   </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="/js/main.js" th:src="@{/js/main.js}"></script>
   <script th:src="@{/js/form-validation.js?v=1}"></script>
   <script>
       $(document).ready(function(){
