@@ -11,7 +11,7 @@ public class ConfirmStockVerificationReq {
     private String uuid;
     private List<StockVerificationItemDto> verificationItems;
 
-    public ConfirmStockVerificationReq(){
+    public ConfirmStockVerificationReq() {
         verificationItems = new ArrayList<>();
     }
 

@@ -1,174 +1,197 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!--Font Awesome CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="../../static/css/main.css" th:href="@{/css/main.css?v=3}">
     <title>Verificar Stock</title>
 </head>
 <body th:with="notStarted = ${T(com.treshermanas.thcweb.beans.products.VerificationStatus).NOT_STARTED}, started =${T(com.treshermanas.thcweb.beans.products.VerificationStatus).STARTED}, saved = ${T(com.treshermanas.thcweb.beans.products.VerificationStatus).SAVED}">
 
-  <header th:insert="fragments.html :: header"> </header>
+<header th:insert="fragments.html :: header"></header>
 
-  <div th:if="${stockVerification?.status==notStarted}" class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-      Existen <strong th:text="${stockVerification.pendingVerificationCount}">34</strong> productos pendientes de verificación de stock.
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-      </button>
-  </div>
-  <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-       <strong th:text="${errorMessage}">Ha ocurrido un error con su consulta.</strong>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-      </button>
-  </div>
-  <div th:if="${stockVerification?.status == saved}" class="alert alert-success text-center" role="alert">
-      La verificación ha sido almacenada con éxito. Para iniciar una nueva verificación  <a href="#" th:href="@{/stock/stock_verification}" class="alert-link">HAGA CLICK AQUÍ</a>
-  </div>
-    <div class="title text-center">
-        <h1 >Verificación de Stock</h1>
-    </div>
-  <form class="form-horizontal needs-validation" id="stock-verification-form" action="#" th:action="${stockVerification?.status == notStarted}?@{/stock/start_verification}:@{/stock/save_verification}" th:object="${stockVerification}" method="post" novalidate>
+<div th:if="${stockVerification?.status==notStarted}"
+     class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+    Existen <strong th:text="${stockVerification.pendingVerificationCount}">34</strong> productos pendientes de
+    verificación de stock.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+    <strong th:text="${errorMessage}">Ha ocurrido un error con su consulta.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div th:if="${stockVerification?.status == saved}" class="alert alert-success text-center" role="alert">
+    La verificación ha sido almacenada con éxito. Para iniciar una nueva verificación <a href="#"
+                                                                                         th:href="@{/stock/stock_verification}"
+                                                                                         class="alert-link">HAGA CLICK
+    AQUÍ</a>
+</div>
+<div class="title text-center">
+    <h1>Verificación de Stock</h1>
+</div>
+<form class="form-horizontal needs-validation" id="stock-verification-form" action="#"
+      th:action="${stockVerification?.status == notStarted}?@{/stock/start_verification}:@{/stock/save_verification}"
+      th:object="${stockVerification}" method="post" novalidate>
     <div class="container thc-container border border-light rounded pr-0 pl-0">
 
-            <input type="hidden" th:field="*{uuid}" />
-            <div class="form-group row justify-content-center mb-0">
-                <label class="col-sm-2 col-form-label " for="ver_date">Fecha:</label>
-                <div class="col-sm-3">
-                    <input type="datetime" th:field="*{startDate}" id="ver_date" class="form-control form-control-sm"
-                           th:value="*{startDate}"
-                           readonly />
+        <input type="hidden" th:field="*{uuid}"/>
+        <div class="form-group row justify-content-center mb-0">
+            <label class="col-sm-2 col-form-label " for="ver_date">Fecha:</label>
+            <div class="col-sm-3">
+                <input type="datetime" th:field="*{startDate}" id="ver_date" class="form-control form-control-sm"
+                       th:value="*{startDate}"
+                       readonly/>
 
-                </div>
             </div>
-            <div class="form-group row justify-content-center  mb-0">
-                <label class="col-sm-2 col-form-label " for="ver_user">Usuario:</label>
-                <div class="col-sm-3 ">
-                    <input type="text" th:field="*{userName}" id="ver_user" class="form-control form-control-sm" readonly/>
-                </div>
+        </div>
+        <div class="form-group row justify-content-center  mb-0">
+            <label class="col-sm-2 col-form-label " for="ver_user">Usuario:</label>
+            <div class="col-sm-3 ">
+                <input type="text" th:field="*{userName}" id="ver_user" class="form-control form-control-sm" readonly/>
             </div>
-            <div class="form-group row justify-content-center  mb-0">
-                <label class="col-sm-2 col-form-label " for="ver_warehouse">Depósito:</label>
-                <div class="col-sm-3 ">
-                    <select class="form-control form-control-sm"  id="ver_warehouse" th:field="*{warehouse}">
-                        <option th:each="wh : ${warehousesList}"
-                                th:value="${wh.id}"
-                                th:text="${ wh.description}">DepósitoProductos</option>
-                    </select>
-                </div>
+        </div>
+        <div class="form-group row justify-content-center  mb-0">
+            <label class="col-sm-2 col-form-label " for="ver_warehouse">Depósito:</label>
+            <div class="col-sm-3 ">
+                <select class="form-control form-control-sm" id="ver_warehouse" th:field="*{warehouse}">
+                    <option th:each="wh : ${warehousesList}"
+                            th:value="${wh.id}"
+                            th:text="${ wh.description}">DepósitoProductos
+                    </option>
+                </select>
             </div>
-            <div class="form-group row justify-content-center mb-0">
-                <label class="col-sm-2 col-form-label " for="ver_product">Producto:</label>
-                <div class="col-sm-3">
-                    <input type="text" th:field="*{product}" id="ver_product" class="form-control form-control-sm"  />
-                </div>
+        </div>
+        <div class="form-group row justify-content-center mb-0">
+            <label class="col-sm-2 col-form-label " for="ver_product">Producto:</label>
+            <div class="col-sm-3">
+                <input type="text" th:field="*{product}" id="ver_product" class="form-control form-control-sm"/>
             </div>
-            <div class="from-group row">
-                    <div class="col-sm-2 offset-sm-5">
-                        <button  class="btn btn-secondary btn-sm" type="button" th:disabled="${stockVerification.status == saved}" th:id="${stockVerification.status == notStarted}?'search-btn':'cancel-btn'"
-                                 th:text="${stockVerification.status == notStarted}?'Buscar Productos':'Cancelar Verificación'">Buscar Productos </button>
-                    </div>
-                <div class="col-sm-2">
-                    <button  class="btn btn-primary btn-sm" type="submit" th:disabled="${stockVerification.status == saved}" th:text="${stockVerification.status == notStarted}?'Iniciar Verificación':'Guardar Verificación'">Iniciar Verificación</button>
-                </div>
+        </div>
+        <div class="from-group row">
+            <div class="col-sm-2 offset-sm-5">
+                <button class="btn btn-secondary btn-sm" type="button"
+                        th:disabled="${stockVerification.status == saved}"
+                        th:id="${stockVerification.status == notStarted}?'search-btn':'cancel-btn'"
+                        th:text="${stockVerification.status == notStarted}?'Buscar Productos':'Cancelar Verificación'">
+                    Buscar Productos
+                </button>
             </div>
+            <div class="col-sm-2">
+                <button class="btn btn-primary btn-sm" type="submit" th:disabled="${stockVerification.status == saved}"
+                        th:text="${stockVerification.status == notStarted}?'Iniciar Verificación':'Guardar Verificación'">
+                    Iniciar Verificación
+                </button>
+            </div>
+        </div>
     </div>
 
     <div class="container mt-3" th:if="${stockVerification.status != saved}">
         <div class="row justify-content-center table-responsive-sm ">
             <table class="table table-sm table-bordered">
                 <thead class="thead-light">
-                    <tr>
-                        <th scope="col" style="width:5%">#</th>
-                        <th colspan="2" scope="col" style="width:65%">Producto</th>
-                        <th scope="col" style="width:15%">Stock </th>
-                        <th th:if="${stockVerification.status == started}" scope="col" style="width:15%">Cantidad Real</th>
-                    </tr>
+                <tr>
+                    <th scope="col" style="width:5%">#</th>
+                    <th colspan="2" scope="col" style="width:65%">Producto</th>
+                    <th scope="col" style="width:15%">Stock</th>
+                    <th th:if="${stockVerification.status == started}" scope="col" style="width:15%">Cantidad Real</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="svi,itemStat : *{items}">
-                        <th scope="row" th:text="${itemStat.count}">1</th>
-                        <td colspan="2" th:text="${svi.productStock.product.ref}+' - '+${svi.productStock.product.description}"><strong> ELEAIREDFD </strong> - AIRE TOKYO 12000 BTU</td>
-                        <td th:text="${svi.productStock.quantity}">1</td>
-                        <td th:if="${stockVerification.status == started}">
-                            <div class="row">
-                               <div class="col-9">
-                                    <input type="number"  class="form-control form-control-sm"  th:field="*{items[__${itemStat.index}__].currentCount}" th:id="real_stock_input_+${itemStat.count}" required/>
-                                   <input type="hidden" th:field="*{items[__${itemStat.index}__].id}"/>
-                                   <div class="invalid-feedback">Obligatorio</div>
-                               </div>
-                                  <div class="col-3 pl-0">
-                                   <span class="fa fa-exclamation-triangle fa-cog d-none"></span>
-                                  </div>
+                <tr th:each="svi,itemStat : *{items}">
+                    <th scope="row" th:text="${itemStat.count}">1</th>
+                    <td colspan="2"
+                        th:text="${svi.productStock.product.ref}+' - '+${svi.productStock.product.description}"><strong>
+                        ELEAIREDFD </strong> - AIRE TOKYO 12000 BTU
+                    </td>
+                    <td th:text="${svi.productStock.quantity}">1</td>
+                    <td th:if="${stockVerification.status == started}">
+                        <div class="row">
+                            <div class="col-9">
+                                <input type="number" class="form-control form-control-sm"
+                                       th:field="*{items[__${itemStat.index}__].currentCount}"
+                                       th:id="real_stock_input_+${itemStat.count}" required/>
+                                <input type="hidden" th:field="*{items[__${itemStat.index}__].id}"/>
+                                <div class="invalid-feedback">Obligatorio</div>
                             </div>
-                        </td>
-                    </tr>
+                            <div class="col-3 pl-0">
+                                <span class="fa fa-exclamation-triangle fa-cog d-none"></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
     </div>
-  </form>
+</form>
 
-  <div class="modal" id="thc-modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title warning">Atención!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  <p>Está seguro que desea <strong>cancelar</strong> la operación actual?</p>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" id="thc-modal-submit" class="btn btn-primary">Si</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-              </div>
-          </div>
-      </div>
-      <script>
+<div class="modal" id="thc-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title warning">Atención!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Está seguro que desea <strong>cancelar</strong> la operación actual?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="thc-modal-submit" class="btn btn-primary">Si</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+    <script>
 
-      </script>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-  <script src="/js/main.js" th:src="@{/js/main.js}"></script>
-  <script th:src="@{/js/form-validation.js?v=1}"></script>
-  <script>
-      $(document).ready(function(){
-          $('.toast').toast('show');
-          $("#cancel-btn").on("click", function(e){
+    </script>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="/js/main.js" th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/form-validation.js?v=1}"></script>
+<script>
+    $(document).ready(function () {
+        $('.toast').toast('show');
+        $("#cancel-btn").on("click", function (e) {
 
-              e.preventDefault();
-              $('#thc-modal').modal('show');
-              $('#thc-modal-submit').click(function(){
-                  $('#stock-verification-form').attr('action', "/stock/cancel_verification").submit();
-              });
+            e.preventDefault();
+            $('#thc-modal').modal('show');
+            $('#thc-modal-submit').click(function () {
+                $('#stock-verification-form').attr('action', "/stock/cancel_verification").submit();
+            });
 
-          });
-          $("#search-btn").on("click", function(e){
-              $('#stock-verification-form').attr('method',"get").attr('action', "/stock/stock_verification").submit();
-          });
-          $('[id^=real_stock_input]').on('change',function () {
-              $('form').removeClass('was-validated');
-              var currentStock = $(this).closest('td').prev().text();
-              if(currentStock != $(this).val()){
-                  $(this).closest('div').next().find('span').removeClass('d-none');
-              }
-              console.log('currentStock: '+ currentStock + 'this.val'+$(this).val());
-          })
+        });
+        $("#search-btn").on("click", function (e) {
+            $('#stock-verification-form').attr('method', "get").attr('action', "/stock/stock_verification").submit();
+        });
+        $('[id^=real_stock_input]').on('change', function () {
+            $('form').removeClass('was-validated');
+            var currentStock = $(this).closest('td').prev().text();
+            if (currentStock != $(this).val()) {
+                $(this).closest('div').next().find('span').removeClass('d-none');
+            }
+            console.log('currentStock: ' + currentStock + 'this.val' + $(this).val());
+        })
 
-      });
-  </script>
+    });
+</script>
 </body>
 </html>

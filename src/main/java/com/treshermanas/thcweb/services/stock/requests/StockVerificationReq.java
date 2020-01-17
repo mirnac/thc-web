@@ -12,11 +12,12 @@ public class StockVerificationReq {
     private Integer warehouse;
     @NotNull
     private String userName;
-    public StockVerificationReq(){
+
+    public StockVerificationReq() {
 
     }
 
-    public StockVerificationReq(Integer warehouse){
+    public StockVerificationReq(Integer warehouse) {
         this.warehouse = warehouse;
     }
 
@@ -60,7 +61,7 @@ public class StockVerificationReq {
         this.userName = userName;
     }
 
-    public static class Builder{
+    public static class Builder {
 
         private String name;
         private Integer pageSize;
@@ -68,35 +69,38 @@ public class StockVerificationReq {
         private Integer warehouse;
         private String userName;
 
-        private Builder(Integer warehouse, String userName){
+        private Builder(Integer warehouse, String userName) {
             this.warehouse = warehouse;
             this.userName = userName;
         }
 
-        public static Builder builder(Integer warehouse, String userName){
+        public static Builder builder(Integer warehouse, String userName) {
             return new Builder(warehouse, userName);
         }
 
-        public Builder withName(String name){
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
-        public Builder withPageNumber(Integer pageNumber){
+
+        public Builder withPageNumber(Integer pageNumber) {
             this.pageNumber = pageNumber;
             return this;
         }
-        public Builder withPageSize(Integer pageSize){
+
+        public Builder withPageSize(Integer pageSize) {
             this.pageSize = pageSize;
             return this;
         }
-        public StockVerificationReq build(){
-             StockVerificationReq req = new StockVerificationReq(warehouse);
 
-             req.setName(name);
-             req.setPageNumber(pageNumber);
-             req.setPageSize(pageSize);
-             req.setUserName(userName);
-             return req;
+        public StockVerificationReq build() {
+            StockVerificationReq req = new StockVerificationReq(warehouse);
+
+            req.setName(name);
+            req.setPageNumber(pageNumber);
+            req.setPageSize(pageSize);
+            req.setUserName(userName);
+            return req;
         }
     }
 }

@@ -7,12 +7,14 @@ public class Product {
     private String ref;
     private String label;
     private String description;
-    private BigDecimal price;
-    private BigDecimal priceTtc;
-    private BigDecimal priceMinTtc;
+    private BigDecimal unitPriceTaxExcl;
+    private BigDecimal unitPriceTaxIncl;
+    private BigDecimal minPriceTaxExcl;
+    private BigDecimal minPriceTaxIncl;
+    private BigDecimal threeInstPrice;
     private String priceBaseType;
 
-    public Product(){
+    public Product() {
 
     }
 
@@ -40,28 +42,28 @@ public class Product {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getUnitPriceTaxExcl() {
+        return unitPriceTaxExcl;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setUnitPriceTaxExcl(BigDecimal unitPriceTaxExcl) {
+        this.unitPriceTaxExcl = unitPriceTaxExcl;
     }
 
-    public BigDecimal getPriceTtc() {
-        return priceTtc;
+    public BigDecimal getUnitPriceTaxIncl() {
+        return unitPriceTaxIncl;
     }
 
-    public void setPriceTtc(BigDecimal priceTtc) {
-        this.priceTtc = priceTtc;
+    public void setUnitPriceTaxIncl(BigDecimal unitPriceTaxIncl) {
+        this.unitPriceTaxIncl = unitPriceTaxIncl;
     }
 
-    public BigDecimal getPriceMinTtc() {
-        return priceMinTtc;
+    public BigDecimal getMinPriceTaxIncl() {
+        return minPriceTaxIncl;
     }
 
-    public void setPriceMinTtc(BigDecimal priceMinTtc) {
-        this.priceMinTtc = priceMinTtc;
+    public void setMinPriceTaxIncl(BigDecimal minPriceTaxIncl) {
+        this.minPriceTaxIncl = minPriceTaxIncl;
     }
 
     public String getPriceBaseType() {
@@ -70,5 +72,21 @@ public class Product {
 
     public void setPriceBaseType(String priceBaseType) {
         this.priceBaseType = priceBaseType;
+    }
+
+    public BigDecimal getMinPriceTaxExcl() {
+        return minPriceTaxExcl;
+    }
+
+    public void setMinPriceTaxExcl(BigDecimal minPriceTaxExcl) {
+        this.minPriceTaxExcl = minPriceTaxExcl;
+    }
+
+    public BigDecimal getThreeInstPrice() {
+        return threeInstPrice;
+    }
+
+    public void setThreeInstPrice(BigDecimal threeInstPrice) {
+        this.threeInstPrice = threeInstPrice;
     }
 }

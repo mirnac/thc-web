@@ -40,23 +40,24 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
         ApiErrorDto errorDto = null;
         String errorMessage = "";
 
-        HttpMessageConverterExtractor<ApiErrorDto> msgExtractor = new HttpMessageConverterExtractor<>(ApiErrorDto.class,messageConverters);
-        try{
+        HttpMessageConverterExtractor<ApiErrorDto> msgExtractor = new HttpMessageConverterExtractor<>(ApiErrorDto.class, messageConverters);
+        try {
 
             errorDto = msgExtractor.extractData(clientHttpResponse);
             errorMessage = errorDto.getErrorMessage();
 
             log.error(errorDto.toString());
 
-        }catch (Exception e){ }
+        } catch (Exception e) {
+        }
 
         if (clientHttpResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
             throw new DataNotFoundException(errorMessage);
-        }else if(clientHttpResponse.getStatusCode() == HttpStatus.UNAUTHORIZED){
+        } else if (clientHttpResponse.getStatusCode() == HttpStatus.UNAUTHORIZED) {
             throw new AuthenticationException(errorMessage);
         } else if (clientHttpResponse.getStatusCode()
                 .series() == HttpStatus.Series.SERVER_ERROR) {
-            throw  new ThcServiceException(errorMessage);
+            throw new ThcServiceException(errorMessage);
 
         } else if (clientHttpResponse.getStatusCode()
                 .series() == HttpStatus.Series.CLIENT_ERROR) {

@@ -17,7 +17,7 @@ public class StockVerificationModel {
     private VerificationStatus status;
     private List<StockVerificationItem> items;
 
-    public StockVerificationModel(){
+    public StockVerificationModel() {
 
     }
 

@@ -22,11 +22,11 @@ public class ProductRepairController {
         this.trelloBridgeService = trelloBridgeService;
     }
 
-    @RequestMapping(value = "/reparacion/tablero",method = RequestMethod.GET)
-    public String gotoRepairSummary(Model model){
+    @RequestMapping(value = "/reparacion/tablero", method = RequestMethod.GET)
+    public String gotoRepairSummary(Model model) {
 
-       List<BoardList> boardLists = trelloBridgeService.getTrelloBoardsLists(trelloRepairBoardId);
-       model.addAttribute("boardLists",boardLists);
+        List<BoardList> boardLists = trelloBridgeService.getTrelloBoardsLists(trelloRepairBoardId);
+        model.addAttribute("boardLists", boardLists);
 
         return "/productos/reparacion";
     }

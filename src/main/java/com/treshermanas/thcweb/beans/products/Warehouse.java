@@ -5,7 +5,7 @@ public class Warehouse {
     private Integer id;
     private String description;
 
-    public Warehouse(){
+    public Warehouse() {
 
     }
 

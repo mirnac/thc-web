@@ -14,7 +14,7 @@ public class UserDto {
     private String mobileNumber;
     private Set<RightDefinitionDto> rights;
 
-    public UserDto(){
+    public UserDto() {
         rights = new HashSet<>();
     }
 

@@ -13,5 +13,6 @@ public interface TrelloBridgeService {
     String POST_CARD_PATH = "/cards?idList={idList}&keepFromSource=all&key={apiKey}&token={authToken}";
 
     List<BoardList> getTrelloBoardsLists(String boardId) throws ThcServiceException;
-    Card addCardToBoard(String idList, Card card) throws  ThcServiceException;
+
+    Card addCardToBoard(String idList, Card card) throws ThcServiceException;
 }

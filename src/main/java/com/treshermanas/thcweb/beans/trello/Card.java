@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Card {
 
-    public enum CardPosition{
+    public enum CardPosition {
         TOP, BOTTOM
     }
 
@@ -16,7 +16,7 @@ public class Card {
     private Boolean dueComplete;
     private String idList;
 
-    private Card(){
+    private Card() {
 
     }
 
@@ -81,7 +81,7 @@ public class Card {
         this.idList = idList;
     }
 
-    public static final class Builder{
+    public static final class Builder {
 
         private String id;
         private String name;
@@ -91,40 +91,44 @@ public class Card {
         private Boolean dueComplete;
         private String idList;
 
-        private Builder(String name, String desc){
+        private Builder(String name, String desc) {
             this.name = name;
             this.desc = desc;
 
         }
 
-        public static Builder getBuilder(String name,  String desc){
+        public static Builder getBuilder(String name, String desc) {
             return new Builder(name, desc);
         }
 
-        public Builder withId(String id){
+        public Builder withId(String id) {
             this.id = id;
             return this;
         }
-        public Builder withPos(CardPosition pos){
+
+        public Builder withPos(CardPosition pos) {
             this.pos = pos;
             return this;
         }
-        public Builder withDue(Date due){
+
+        public Builder withDue(Date due) {
             this.due = due;
             return this;
         }
-        public Builder withDueComplete(Boolean dueComplete){
-            this.dueComplete  = dueComplete;
+
+        public Builder withDueComplete(Boolean dueComplete) {
+            this.dueComplete = dueComplete;
             return this;
         }
-        public Builder withIdList(String listId){
+
+        public Builder withIdList(String listId) {
             this.idList = listId;
             return this;
         }
 
-        public Card build(){
+        public Card build() {
 
-            Card card = new Card(id,name);
+            Card card = new Card(id, name);
 
             card.setId(id);
             card.setPos(pos);
@@ -132,7 +136,7 @@ public class Card {
             card.setDue(due);
             card.setDueComplete(dueComplete);
             card.setIdList(idList);
-            return  card;
+            return card;
         }
     }
 }

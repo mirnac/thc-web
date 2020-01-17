@@ -16,13 +16,13 @@ import java.util.Map;
 public class TrelloBridgeServiceImpl implements TrelloBridgeService {
 
     @Value("${trello.base.url}")
-    private  String TRELLO_BASE_URL;
+    private String TRELLO_BASE_URL;
 
     @Value("${trello.api-key}")
     private String trelloApiKey;
 
     @Value("${trello.api-oauth}")
-    private  String trellopApiOauth;
+    private String trellopApiOauth;
 
     private final RestTemplate restTemplate;
 
@@ -34,9 +34,9 @@ public class TrelloBridgeServiceImpl implements TrelloBridgeService {
     public List<BoardList> getTrelloBoardsLists(String boardId) throws ThcServiceException {
 
         Map<String, String> params = createParametersMap();
-        String url = String.format(TRELLO_BASE_URL+GET_BOARDS_LIST_PATH,boardId);
+        String url = String.format(TRELLO_BASE_URL + GET_BOARDS_LIST_PATH, boardId);
 
-        BoardList[] boardLists = restTemplate.getForObject(url,BoardList[].class,params);
+        BoardList[] boardLists = restTemplate.getForObject(url, BoardList[].class, params);
 
         return Arrays.asList(boardLists);
     }
@@ -44,23 +44,23 @@ public class TrelloBridgeServiceImpl implements TrelloBridgeService {
     @Override
     public Card addCardToBoard(String idList, Card card) throws ThcServiceException {
 
-        if(card.getIdList() == null)
+        if (card.getIdList() == null)
             card.setIdList(idList);
-        else if(!card.getIdList().equals(idList))
+        else if (!card.getIdList().equals(idList))
             throw new ThcServiceException("La tarjeta ya tiene un idList que no coincide con el enviado como parámetro");
 
         Map<String, String> params = createParametersMap();
-        params.put("idList",idList);
-        String url = String.format(TRELLO_BASE_URL+POST_CARD_PATH);
-        restTemplate.postForObject(url,null,Card.class,params);
+        params.put("idList", idList);
+        String url = String.format(TRELLO_BASE_URL + POST_CARD_PATH);
+        restTemplate.postForObject(url, null, Card.class, params);
         return null;
     }
 
-    private Map<String,String> createParametersMap(){
+    private Map<String, String> createParametersMap() {
 
         Map<String, String> params = new HashMap<>();
         params.put("apiKey", trelloApiKey);
-        params.put("authToken",trellopApiOauth);
+        params.put("authToken", trellopApiOauth);
 
         return params;
     }

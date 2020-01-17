@@ -13,11 +13,11 @@ public class BoardList {
     private Integer softLimit;
     private List<Card> cards;
 
-    private BoardList(){
+    private BoardList() {
 
     }
 
-    public BoardList(String id, String name){
+    public BoardList(String id, String name) {
         this.id = id;
         this.name = name;
     }

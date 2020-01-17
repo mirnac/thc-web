@@ -10,7 +10,7 @@ public class PageDto<T> implements Serializable {
     private Integer pageSize;
     private Integer totalPagesCount;
 
-    public PageDto(Integer number, Integer pageSize){
+    public PageDto(Integer number, Integer pageSize) {
         this.number = number;
         this.pageSize = pageSize;
     }
@@ -47,34 +47,34 @@ public class PageDto<T> implements Serializable {
         this.totalPagesCount = totalPagesCount;
     }
 
-    public static class Builder<T>{
+    public static class Builder<T> {
 
         private Integer number;
         private List<T> data;
         private Integer pageSize;
         private Integer totalPagesCount;
 
-        private Builder(Integer number, Integer pageSize){
+        private Builder(Integer number, Integer pageSize) {
             this.number = number;
             this.pageSize = pageSize;
         }
 
-        public static Builder builder(Integer pageNumber, Integer pageSize){
-            return new Builder(pageNumber,pageSize);
+        public static Builder builder(Integer pageNumber, Integer pageSize) {
+            return new Builder(pageNumber, pageSize);
         }
 
-        public Builder withData(List<T> data){
+        public Builder withData(List<T> data) {
             this.data = data;
             return this;
         }
 
-        public Builder withTotalCount(Integer count){
+        public Builder withTotalCount(Integer count) {
             this.totalPagesCount = count;
             return this;
         }
 
-        public PageDto<T> build(){
-            PageDto<T> pageDto = new PageDto<>(number,pageSize);
+        public PageDto<T> build() {
+            PageDto<T> pageDto = new PageDto<>(number, pageSize);
             pageDto.setData(data);
             pageDto.setTotalPagesCount(totalPagesCount);
             return pageDto;
