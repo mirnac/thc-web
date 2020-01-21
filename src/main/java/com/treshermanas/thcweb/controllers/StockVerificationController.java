@@ -84,7 +84,7 @@ public class StockVerificationController {
         stockVerificationService.cancelVerification(stockVerification.getUuid());
         model.addAttribute("stockVerification",new StockVerification());
 
-        return new RedirectView("/stock/stock_verification");
+        return new RedirectView("/thc-web/stock/stock_verification");
     }
     @RequestMapping(value = "/stock/save_verification", method = RequestMethod.POST)
     public String saveVerification(@ModelAttribute StockVerification stockVerification, Model model){
