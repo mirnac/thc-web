@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,7 +28,7 @@
     <h2> Cierre Ventas</h2>
 </div>
 <!-- Inicio form container  -->
-<form method="get" target="_blank" action="/thc-web/ventas/imp_cierre">
+<form method="get" target="_blank" action="/thc-web/payments/report">
 
     <div class="container">
         <div class="row justify-content-md-center">
@@ -37,7 +37,8 @@
                  <div class="row justify-content-center">
                             <div class="form-group col-md-3 bootstrap-iso">
                                 <label for="fec_cierre">Ingrese la fecha:</label>
-                                <input class="form-control" id="fec_cierre" name="date" placeholder="dd/mm/aaaa"  data-date-today-btn="linked"  type="text"/>
+                                <input class="form-control" id="fec_cierre" onclick="this.setCustomValidity('')" onchange="this.setCustomValidity('')"
+                                       oninvalid="this.setCustomValidity('Ingrese la fecha')" name="date" placeholder="dd/mm/aaaa" required data-date-today-btn="linked"  type="text"/>
                             </div>
                  </div>
                 <div class="row justify-content-center">

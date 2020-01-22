@@ -1,26 +1,28 @@
 package com.treshermanas.thcweb.services.dto;
 
-import org.springframework.util.MimeType;
-
 public class Resource {
 
-	private byte[] data;
-	private MimeType contentType;//content-type
+	private String data;
+	private String contentType;//content-type
 
-	public Resource(MimeType tipo){
+	public Resource(){
+
+	}
+
+	public Resource(String tipo){
 		this.contentType = tipo;
 	}
 	
-	public byte[] getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(byte[] data) {
+	public void setData(String data) {
 		this.data = data;
 	}
-	public MimeType getContentType() {
+	public String getContentType() {
 		return contentType;
 	}
-	public void setContentType(MimeType contentType) {
+	public void setContentType(String contentType) {
 		this.contentType = contentType;
 	}
 	
