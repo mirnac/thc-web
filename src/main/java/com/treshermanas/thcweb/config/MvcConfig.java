@@ -17,6 +17,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
 
         registry.addViewController("/payments/report/go").setViewName("payments/payments_report");
+        registry.addViewController("/invoices/unpaid/report/go").setViewName("invoices/unpaid_report");
     }
 }
 
