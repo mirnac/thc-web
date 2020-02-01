@@ -18,10 +18,10 @@ public class TrelloBridgeServiceImpl implements TrelloBridgeService {
     @Value("${trello.base.url}")
     private String TRELLO_BASE_URL;
 
-    @Value("${trello.api-key}")
+    @Value("${trello.apikey}")
     private String trelloApiKey;
 
-    @Value("${trello.api-oauth}")
+    @Value("${trello.apioauth}")
     private String trellopApiOauth;
 
     private final RestTemplate restTemplate;
