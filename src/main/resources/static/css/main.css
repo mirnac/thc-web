@@ -6,7 +6,7 @@ body {
 /*--- navigation bar ---*/
 
 .navbar {
-    background:#6ab446;
+    background: #6ab446;
 }
 
 .nav-link,
@@ -33,10 +33,12 @@ body {
     color: #6ab446;
     padding: 1rem;
 }
+
 .title h3 {
     color: #6ab446;
     padding: 1rem;
 }
+
 .thc-container {
     padding-bottom: 1rem;
     padding-top: 1rem;
@@ -72,6 +74,6 @@ body {
     color: #ff8d13;
 }
 
-.thc-color{
+.thc-color {
     color: #6ab446;
 }

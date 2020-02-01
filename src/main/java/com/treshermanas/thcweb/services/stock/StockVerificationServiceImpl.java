@@ -33,7 +33,7 @@ public class StockVerificationServiceImpl implements StockVerificationService {
     private RestTemplate restTemplate;
     private ModelMapper modelMapper;
 
-    public StockVerificationServiceImpl(RestTemplate restTemplate, ModelMapper modelMapper){
+    public StockVerificationServiceImpl(RestTemplate restTemplate, ModelMapper modelMapper) {
         this.restTemplate = restTemplate;
         this.modelMapper = modelMapper;
     }
@@ -42,20 +42,20 @@ public class StockVerificationServiceImpl implements StockVerificationService {
     @Override
     public Integer getPendingVerificationCount(Integer warehouse) {
         String url = baseUrl + GET_PENDING_COUNT_PATH;
-        url = String.format(url,warehouse);
+        url = String.format(url, warehouse);
         return restTemplate.getForObject(url, Integer.class);
     }
 
     @Override
-    public List<StockVerificationItem> pendingVerificationProducts(Integer warehouse, String product)
-    {
+    public List<StockVerificationItem> pendingVerificationProducts(Integer warehouse, String product) {
         String url = baseUrl + GET_PENDING_VERIFICATION_PATH;
-        url = String.format(url,warehouse,pageSize);
-        if(product != null)
-            url = url+"&name="+product;
+        url = String.format(url, warehouse, pageSize);
+        if (product != null)
+            url = url + "&name=" + product;
 
-        PageDto<ProductStockDto> pendingPage =  restTemplate.exchange(url, HttpMethod.GET,
-        null, new ParameterizedTypeReference<PageDto<ProductStockDto>>(){}).getBody();
+        PageDto<ProductStockDto> pendingPage = restTemplate.exchange(url, HttpMethod.GET,
+                null, new ParameterizedTypeReference<PageDto<ProductStockDto>>() {
+                }).getBody();
 
         return getVerificationItemsFromPageDto(pendingPage);
     }
@@ -64,7 +64,7 @@ public class StockVerificationServiceImpl implements StockVerificationService {
     public StockVerificationModel startVerification(Integer warehouse, String userName, String product) {
 
         StockVerificationReq request = StockVerificationReq.Builder
-                .builder(warehouse,userName)
+                .builder(warehouse, userName)
                 .withName(product)
                 .withPageNumber(PAGE_NUMBER)
                 .withPageSize(pageSize)
@@ -72,10 +72,11 @@ public class StockVerificationServiceImpl implements StockVerificationService {
 
         String url = baseUrl + POST_START_VERIFICATION_PATH;
         HttpEntity<StockVerificationReq> requestData = new HttpEntity<>(request);
-        StockVerificationDto responseDto =  restTemplate.postForObject(url,requestData, StockVerificationDto.class);
+        StockVerificationDto responseDto = restTemplate.postForObject(url, requestData, StockVerificationDto.class);
 
-        StockVerificationModel responseModel = modelMapper.map(responseDto,StockVerificationModel.class);
-        java.lang.reflect.Type type = new TypeToken<List<StockVerificationItem>>(){}.getType();
+        StockVerificationModel responseModel = modelMapper.map(responseDto, StockVerificationModel.class);
+        java.lang.reflect.Type type = new TypeToken<List<StockVerificationItem>>() {
+        }.getType();
         responseModel.setItems(
                 modelMapper.map(responseDto.getPage().getData(),
                         type)
@@ -83,24 +84,24 @@ public class StockVerificationServiceImpl implements StockVerificationService {
         return responseModel;
     }
 
-    private List<StockVerificationItem> getVerificationItemsFromPageDto(PageDto<ProductStockDto> pageDto){
+    private List<StockVerificationItem> getVerificationItemsFromPageDto(PageDto<ProductStockDto> pageDto) {
 
         List<StockVerificationItem> verificationItems = new ArrayList<>();
-        if(pageDto != null && pageDto.getTotalPagesCount() > 0)
+        if (pageDto != null && pageDto.getTotalPagesCount() > 0)
             pageDto.getData().forEach(
                     ps -> verificationItems.add(new StockVerificationItem(
-                            modelMapper.map(ps,ProductStock.class)
+                            modelMapper.map(ps, ProductStock.class)
                     ))
             );
 
-        return  verificationItems;
+        return verificationItems;
     }
 
     @Override
     public void cancelVerification(String uuid) {
         String url = baseUrl + PATCH_VERIFICATION_CANCEL;
-        url = String.format(url,uuid);
-        restTemplate.exchange(url,HttpMethod.PATCH,null,Void.TYPE);
+        url = String.format(url, uuid);
+        restTemplate.exchange(url, HttpMethod.PATCH, null, Void.TYPE);
     }
 
     @Override
@@ -109,9 +110,9 @@ public class StockVerificationServiceImpl implements StockVerificationService {
         String url = baseUrl + PUT_VERIFICATION;
 
         ConfirmStockVerificationReq request = new ConfirmStockVerificationReq(uuid,
-                DtoTranslator.convertListToDtoList(items,StockVerificationItemDto.class));
+                DtoTranslator.convertListToDtoList(items, StockVerificationItemDto.class));
         HttpEntity<ConfirmStockVerificationReq> requestData = new HttpEntity<>(request);
-        restTemplate.put(url,requestData);
+        restTemplate.put(url, requestData);
 
     }
 }

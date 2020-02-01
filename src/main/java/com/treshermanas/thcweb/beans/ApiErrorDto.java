@@ -6,7 +6,7 @@ public class ApiErrorDto {
     private String errorCode;
     private String errorMessage;
 
-    public ApiErrorDto(){
+    public ApiErrorDto() {
 
     }
 

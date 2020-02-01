@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
             String url = baseUrl + AUTH_PATH;
             return restTemplate.postForObject(url, requestData, UserDto.class);
 
-        }catch (NoSuchAlgorithmException e){
+        } catch (NoSuchAlgorithmException e) {
             throw new ThcServiceException("Error trying to digest password");
         }
     }

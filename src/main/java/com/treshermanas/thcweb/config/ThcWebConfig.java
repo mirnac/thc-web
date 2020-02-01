@@ -30,8 +30,8 @@ public class ThcWebConfig {
     }
 
     @Bean
-    public ExceptionMappingResolver exceptionMappingResolver(){
-        ExceptionMappingResolver mappingResolver =new ExceptionMappingResolver();
+    public ExceptionMappingResolver exceptionMappingResolver() {
+        ExceptionMappingResolver mappingResolver = new ExceptionMappingResolver();
         mappingResolver.setDefaultErrorView("thc_error");
         return mappingResolver;
     }

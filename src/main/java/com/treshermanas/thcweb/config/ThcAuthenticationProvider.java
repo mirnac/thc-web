@@ -25,10 +25,10 @@ public class ThcAuthenticationProvider implements AuthenticationProvider {
 
         String name = authentication.getName();
         String password = authentication.getCredentials().toString();
-        if (shouldAuthenticateAgainstThirdPartySystem(name,password)) {
+        if (shouldAuthenticateAgainstThirdPartySystem(name, password)) {
 
-            try{
-                UserDto user = authService.authenticateUser(name,password);
+            try {
+                UserDto user = authService.authenticateUser(name, password);
                 /*List<SimpleGrantedAuthority> permissions = new ArrayList<>();
                 user.getRights().forEach(rightDefinitionDto ->
                         permissions.add(new SimpleGrantedAuthority(rightDefinitionDto.getLabel()))
@@ -36,7 +36,7 @@ public class ThcAuthenticationProvider implements AuthenticationProvider {
                 return new UsernamePasswordAuthenticationToken(
                         name, password, new ArrayList<>());
 
-            }catch (com.treshermanas.thcweb.exception.AuthenticationException ae){
+            } catch (com.treshermanas.thcweb.exception.AuthenticationException ae) {
                 throw new BadCredentialsException(ae.getLocalizedMessage());
             }
 
@@ -47,11 +47,11 @@ public class ThcAuthenticationProvider implements AuthenticationProvider {
 
     private boolean shouldAuthenticateAgainstThirdPartySystem(String userName, String password) {
 
-            return true;
+        return true;
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-         return authentication.equals(UsernamePasswordAuthenticationToken.class);
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }

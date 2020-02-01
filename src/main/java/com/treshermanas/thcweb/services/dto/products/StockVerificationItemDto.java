@@ -8,7 +8,7 @@ public class StockVerificationItemDto implements Serializable {
     private ProductStockDto productStock;
     private Integer currentCount;
 
-    public StockVerificationItemDto(){
+    public StockVerificationItemDto() {
     }
 
     public StockVerificationItemDto(ProductStockDto productStock) {

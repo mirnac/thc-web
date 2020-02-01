@@ -8,11 +8,10 @@ public class StockVerificationItem implements Serializable {
     private ProductStock productStock;
     private Integer currentCount;
 
-    public StockVerificationItem(){
+    public StockVerificationItem() {
     }
 
-    public StockVerificationItem(ProductStock productStock)
-    {
+    public StockVerificationItem(ProductStock productStock) {
         this();
         this.productStock = productStock;
     }

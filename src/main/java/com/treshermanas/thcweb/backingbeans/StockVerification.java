@@ -11,7 +11,7 @@ import java.util.List;
 
 public class StockVerification {
 
-    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date startDate;
     private String userName;
     private String uuid;
@@ -21,7 +21,8 @@ public class StockVerification {
     private VerificationStatus status;
 
     private List<StockVerificationItem> items;
-    public StockVerification(){
+
+    public StockVerification() {
         status = VerificationStatus.NOT_STARTED;
         startDate = Calendar.getInstance().getTime();
         items = new ArrayList<>();
