@@ -1,6 +1,6 @@
 package com.treshermanas.thcweb.exception;
 
-public class ThcServiceException extends  RuntimeException {
+public class ThcServiceException extends RuntimeException {
 
     public ThcServiceException() {
     }

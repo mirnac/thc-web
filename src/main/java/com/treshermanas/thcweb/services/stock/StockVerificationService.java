@@ -16,8 +16,12 @@ public interface StockVerificationService {
     String PUT_VERIFICATION              = "/productos/stock/verification";
 
     Integer getPendingVerificationCount(Integer warehouse);
+
     List<StockVerificationItem> pendingVerificationProducts(Integer warehouse, String productDesc);
+
     StockVerificationModel startVerification(Integer warehouse, String userName, String product);
+
     void cancelVerification(String uuid);
+
     void saveVerification(String uuid, List<StockVerificationItem> items);
 }

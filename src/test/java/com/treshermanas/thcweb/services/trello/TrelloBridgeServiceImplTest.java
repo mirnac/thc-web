@@ -11,14 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-class TrelloBridgeServiceImplTest {
+public class TrelloBridgeServiceImplTest {
 
     @Value("${trello.repairBoard.id}")
     private String repairBoardId;
 
     @Autowired
     private TrelloBridgeService trelloBridgeService;
-
 
     void getTrelloBoardsLists() {
 

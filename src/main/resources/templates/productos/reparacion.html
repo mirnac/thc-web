@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!--Font Awesome CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="../../static/css/main.css" th:href="@{/css/main.css?v=3}">
 
     <title>Reparación</title>
 </head>
 <body>
-<header th:insert="fragments.html :: header"> </header>
+<header th:insert="fragments.html :: header"></header>
 
 <div class="title text-center thc-color mt-4">
     <h2> Estado de Productos en Reparación</h2>
@@ -22,7 +24,7 @@
 
 <div class="container mt-4">
     <div class="row justify-content-center">
-            <div class="col-sm-5">
+        <div class="col-sm-5">
             <table class="table table-sm table-bordered">
                 <thead>
                 <tr>
@@ -31,15 +33,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr  th:each="blist,itemStat : ${boardLists}">
-                    <td  th:text="${blist.name}" class="table-active thc-color text-truncate">Mark</td>
-                    <td  th:text="${blist.cards.size()}"> Otto
+                <tr th:each="blist,itemStat : ${boardLists}">
+                    <td th:text="${blist.name}" class="table-active thc-color text-truncate">Mark</td>
+                    <td th:text="${blist.cards.size()}"> Otto
                     </td>
                 </tr>
                 </tbody>
             </table>
-            </div>
         </div>
+    </div>
     <div class="row justify-content-center">
         <label class="col-sm-3 align-self-center">Click para ver el tablero:</label>
     </div>
@@ -53,7 +55,8 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src="/js/main.js" th:src="@{/js/main.js}"></script>
 <script src="https://p.trellocdn.com/embed.min.js"></script>

@@ -13,7 +13,7 @@ public class StockVerificationDto {
     private VerificationStatus status;
     private PageDto<StockVerificationItemDto> page;
 
-    public StockVerificationDto(){
+    public StockVerificationDto() {
 
     }
 

@@ -13,7 +13,7 @@ public class RightDefinitionDto {
     private Module module;
 
 
-    public RightDefinitionDto(){
+    public RightDefinitionDto() {
 
     }
 

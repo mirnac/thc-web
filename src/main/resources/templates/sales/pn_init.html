@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!--Font Awesome CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="../../static/css/main.css" th:href="@{/css/main.css?v=3}">
+
+    <!-- Bootstrap Date Picker Plugin-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css"/>
+
+    <title>Pagaré</title>
+</head>
+<body>
+<header th:insert="fragments.html :: header"></header>
+<div  class="alert alert-danger alert-dismissible fade show text-center" th:classappend="${invoice.paymentTerm.code=='CONT'?'':'d-none'}" role="alert">
+    No se pueden generar Pagarés para Facturas  <strong th:text="${invoice.paymentTerm.label}">34</strong>
+</div>
+<div class="title text-center thc-color mt-4">
+    <h2>Generar Pagaré</h2>
+</div>
+<form class="form-horizontal needs-validation" id="show-promissory_note-form" action="#"
+      th:object="${invoice}" method="get" target="_blank" th:action="@{/sales/promissory_note/report}">
+
+    <input type="hidden" id="invoice_id" name="invoice_id" th:value="*{id}"/>
+
+    <div class="container thc-container border border-light rounded pr-0 pl-0">
+
+        <div class="form-group row justify-content-center mb-0">
+            <label class="col-sm-2 col-form-label " for="facnumberInput">Factura Nro.:</label>
+            <div class="col-sm-3">
+                <input type="text" th:field="*{facNumber}" id="facnumberInput" class="form-control form-control-sm" disabled/>
+            </div>
+        </div>
+        <div class="form-group row justify-content-center mb-0">
+            <label class="col-sm-2 col-form-label " for="paymentterm">Cond. de Pago:</label>
+            <div class="col-sm-3">
+                <input type="text" th:field="*{paymentTerm.label}" id="paymentterm" class="form-control form-control-sm" disabled/>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center  mb-0">
+            <label class="col-sm-2 col-form-label " for="ver_user">Cliente:</label>
+            <div class="col-sm-3 ">
+                <input type="text" th:field="*{thirdPerson.name}" id="ver_user" class="form-control form-control-sm" disabled/>
+            </div>
+        </div>
+        <div class="form-group row justify-content-center mb-0">
+            <label class="col-sm-2 col-form-label " for="firstPayment">Fecha de Entrega:</label>
+            <div class="col-sm-3">
+                <input class="form-control form-control-sm" id="firstPayment" onclick="this.setCustomValidity('')" onchange="this.setCustomValidity('')"
+                       oninvalid="this.setCustomValidity('Ingrese la fecha')" name="first_payment" placeholder="dd/mm/aaaa" required data-date-today-btn="linked"  type="text"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2 offset-sm-5">
+                <button id="cancel-btn" class="btn btn-secondary btn-sm" type="button">
+                    Cancelar
+                </button>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-primary btn-sm"  th:disabled="*{paymentTerm.code == 'CONT'?'true':'false'}" type="submit">
+                    Generar
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+<script>
+    $(document).ready(function(){
+
+        $('#firstPayment').datepicker({
+            language:"es",
+            format: "dd/mm/yyyy",
+            orientation:"bottom right",
+            todayHighlight: true,
+            autoclose: true,
+            locale:"es"
+        });
+
+        $('#cancel-btn').click(function () {
+            document.location.href = '/thc-web/index';
+        });
+    })
+</script>
+</html>

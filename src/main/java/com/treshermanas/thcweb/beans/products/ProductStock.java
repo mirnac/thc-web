@@ -6,7 +6,7 @@ public class ProductStock {
     private Integer warehouse;
     private Integer quantity;
 
-    public ProductStock(){
+    public ProductStock() {
 
     }
 

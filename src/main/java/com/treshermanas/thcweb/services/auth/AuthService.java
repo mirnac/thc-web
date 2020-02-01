@@ -6,5 +6,5 @@ public interface AuthService {
 
     String AUTH_PATH = "/auth";
 
-    UserDto authenticateUser(String userName, String password) ;
+    UserDto authenticateUser(String userName, String password);
 }

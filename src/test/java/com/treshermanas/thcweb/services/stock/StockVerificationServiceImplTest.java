@@ -25,7 +25,7 @@ class StockVerificationServiceImplTest {
 
     void pendingVerificationProducts() {
 
-        List<StockVerificationItem> items = stockVerificationService.pendingVerificationProducts(1,null);
+        List<StockVerificationItem> items = stockVerificationService.pendingVerificationProducts(1, null);
         assertNotNull(items);
         assertTrue(items.size() > 0);
     }
@@ -34,7 +34,7 @@ class StockVerificationServiceImplTest {
     void startVerification() {
 
         StockVerificationModel model =
-                stockVerificationService.startVerification(1,"mirnac",null);
+                stockVerificationService.startVerification(1, "mirnac", null);
 
         assertNotNull(model);
         assertNotNull(model.getItems());
@@ -45,7 +45,7 @@ class StockVerificationServiceImplTest {
 
     void cancelVerification() {
         StockVerificationModel model =
-                stockVerificationService.startVerification(1,"mirnac",null);
+                stockVerificationService.startVerification(1, "mirnac", null);
         stockVerificationService.cancelVerification(model.getUuid());
     }
 }
