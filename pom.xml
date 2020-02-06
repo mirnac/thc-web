@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.treshermanas</groupId>
     <artifactId>thc-web</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5-SNAPSHOT</version>
     <name>thc-web</name>
     <description>Proyecto Web Tres Hermanas Comercial</description>
     <packaging>war</packaging>
@@ -120,6 +120,6 @@
     </build>
     <scm>
         <developerConnection>scm:git:git@github.com:mirnac/thc-web.git</developerConnection>
-        <tag>thc-web-0.0.4</tag>
+        <tag>thc-web-0.0.2</tag>
     </scm>
 </project>
