@@ -36,6 +36,7 @@ public class StockVerificationController {
             StockVerification formBean = new StockVerification();
             formBean.setStartDate(Calendar.getInstance().getTime());
             formBean.setUserName(getUserName());
+            formBean.setProduct(product);
             model.addAttribute("stockVerification", formBean);
 
             //TODO: Hacer la consulta de depósitos por entidad y utilizar el primero en este punto.

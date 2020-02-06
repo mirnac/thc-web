@@ -169,18 +169,20 @@
 <script th:src="@{/js/form-validation.js?v=1}"></script>
 <script>
     $(document).ready(function () {
+
+
         $('.toast').toast('show');
         $("#cancel-btn").on("click", function (e) {
 
             e.preventDefault();
             $('#thc-modal').modal('show');
             $('#thc-modal-submit').click(function () {
-                $('#stock-verification-form').attr('action', "/stock/cancel_verification").submit();
+                $('#stock-verification-form').attr('action', "/thc-web/stock/cancel_verification").submit();
             });
 
         });
         $("#search-btn").on("click", function (e) {
-            $('#stock-verification-form').attr('method', "get").attr('action', "/stock/stock_verification").submit();
+            $('#stock-verification-form').attr('method', "get").attr('action', "/thc-web/stock/stock_verification").submit();
         });
         $('[id^=real_stock_input]').on('change', function () {
             $('form').removeClass('was-validated');
