@@ -18,7 +18,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
         registry.addViewController("/payments/report/go").setViewName("payments/payments_report");
         registry.addViewController("/invoices/unpaid/report/go").setViewName("invoices/unpaid_report");
-        registry.addViewController("/pedidos/tablero").setViewName("productos/pedidos");
+        registry.addViewController("/products/details/search/init").setViewName("products/search");
+        registry.addViewController("/pedidos/tablero").setViewName("products/pedidos");
     }
 }
 
