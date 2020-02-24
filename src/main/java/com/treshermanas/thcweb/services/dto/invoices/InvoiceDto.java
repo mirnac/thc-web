@@ -1,5 +1,7 @@
 package com.treshermanas.thcweb.services.dto.invoices;
 
+import com.treshermanas.thcweb.services.dto.thirdparty.ThirdPersonDto;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
