@@ -1,4 +1,4 @@
-package com.treshermanas.thcweb.services.dto.invoices;
+package com.treshermanas.thcweb.services.dto.thirdparty;
 
 public class ThirdPersonDto {
 

@@ -28,7 +28,7 @@ public class ProductRepairController {
         List<BoardList> boardLists = trelloBridgeService.getTrelloBoardsLists(trelloRepairBoardId);
         model.addAttribute("boardLists", boardLists);
 
-        return "/productos/reparacion";
+        return "/products/reparacion";
     }
 
 }

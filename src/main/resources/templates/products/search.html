@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!--Font Awesome CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="../../static/css/main.css" th:href="@{/css/main.css?v=3}">
+
+    <!-- Bootstrap Date Picker Plugin-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css"/>
+
+    <title>Búsqueda de Productos</title>
+</head>
+<body>
+    <header th:insert="fragments.html :: header"></header>
+
+    <div class="alert alert-danger alert-dismissible fade text-center" id="mgs-alert" role="alert">
+        Se debe ingresar al menos un criterio de búsqueda.
+        <button id="msg-close-btn" type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="title text-center">
+        <h1>Búsqueda de Productos</h1>
+    </div>
+    <div class="container thc-container border border-light rounded pr-0 pl-0">
+        <form class="form-horizontal" action="index.html" method="get" id="search_products_form" th:action="@{/products/details/search}"
+              th:object="${searchProductsFilter}" >
+            <div class="form-group row justify-content-center mb-0">
+                <label class="col-sm-2 col-form-label" for="barcode">Código de Barras:</label>
+                <div class="col-sm-3">
+                    <input type="text" name="barcode" value="" id="barcode"
+                           class="form-control form-control-sm" th:field="*{barcode}"/>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center mb-0">
+                <label class="col-sm-2 col-form-label" for="product">Producto:</label>
+                <div class="col-sm-3">
+                    <input type="text" name="product" value="" id="product"
+                           class="form-control form-control-sm" th:field="*{product}">
+                </div>
+            </div>
+            <div class="form-group row justify-content-center mb-0">
+                <label class="col-sm-2 col-form-label" for="creation_date">Fecha Creación:</label>
+                <div class="col-sm-3">
+                    <input class="form-control form-control-sm" name="creation_date" th:field="*{creationDate}"
+                            id="creation_date" th:value="*{creationDate}" onclick="this.setCustomValidity('')" onchange="this.setCustomValidity('')"
+                           oninvalid="this.setCustomValidity('Ingrese la fecha')"  placeholder="dd/mm/aaaa"  data-date-today-btn="linked"  type="text">
+                </div>
+            </div>
+            <div class="form-group row justify-content-center mb-0">
+                <label class="col-sm-2 col-form-label" for="supplier">Proveedor:</label>
+                <div class="col-sm-3 ">
+                    <select class="form-control form-control-sm" name="supplier" id="supplier" th:field="*{supplierCode}">
+                        <option value="">Ninguno</option>
+                        <option value="NGO" th:each="supplier : ${suppliers}"
+                              th:value="${supplier.supplierCode}"
+                              th:text="${supplier.name}">NGO</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center mb-0">
+                <label class="col-sm-2 col-form-label" for="invoice">Nro. Factura: </label>
+                <div class="col-sm-3">
+                    <input class="form-control form-control-sm" type="text" name="invoice" th:field="*{invoice}" id="invoice">
+                </div>
+            </div>
+            <div class="form-group row justify-content-center mb-0">
+                <input class="btn btn-primary btn-sm" type="submit" value="Buscar">
+            </div>
+        </form>
+    </div>
+
+    <div class="container mt-3" th:if="${not #lists.isEmpty(products)}">
+        <div class="row justify-content-end align-items-end">
+            <nav aria-label="Page navigation" th:if="${productsPage.totalPagesCount>0}">
+                <ul class="pagination pagination-sm justify-content-end">
+                    <li class="page-item" th:classappend="${productsPage.number==1} ? disabled">
+                        <a class="page-link" href="#" aria-label="Ant." th:href="@{/products/details/search(pageNumber=${productsPage.number - 1},
+                    barcode=${searchProductsFilter.barcode},
+                    product=${searchProductsFilter.product},
+                    creationDate=${#temporals.format(searchProductsFilter.creationDate,'dd/MM/yyyy')},
+                    supplierCode=${searchProductsFilter.supplierCode})}">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Ant.</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="pageNumber : ${pageNumbers}" th:classappend="${pageNumber==productsPage.number} ? active" >
+                        <a class="page-link"  th:href="@{/products/details/search(pageNumber=${pageNumber},
+                    barcode=${searchProductsFilter.barcode},
+                    product=${searchProductsFilter.product},
+                    creationDate=${#temporals.format(searchProductsFilter.creationDate,'dd/MM/yyyy')},
+                    supplierCode=${searchProductsFilter.supplierCode})}"
+                           href="#" th:text="${pageNumber}"
+                        >1</a>
+                    </li>
+                    <li class="page-item" th:classappend="${productsPage.number==productsPage.totalPagesCount} ? disabled" >
+                        <a class="page-link" href="#" aria-label="Sgte." th:href="@{/products/details/search(pageNumber=${productsPage.number+1},
+                    barcode=${searchProductsFilter.barcode},
+                    product=${searchProductsFilter.product},
+                    creationDate=${#temporals.format(searchProductsFilter.creationDate,'dd/MM/yyyy')},
+                    supplierCode=${searchProductsFilter.supplierCode})}">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Sgte</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row justify-content-center table-responsive-sm ">
+            <table class="table table-sm table-bordered small" >
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col" >Referencia</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Proveedor</th>
+                    <th scope="col">Factura</th>
+                    <th scope="col">Fecha Factura</th>
+                    <th scope="col">Código de Barras</th>
+                   <!-- <th scope="col">Estado</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pd: ${products}">
+                        <td th:text="${pd.product.ref}">ELCOCMULLER4HORN</td>
+                        <td th:text="${pd.product.description}">Cocina Mueller Moderna 4 Hornallas</td>
+                        <td th:text="${pd.supplier.name}">Bartholo</td>
+                        <td th:text="${pd.supplierInvoice.facNumber}">123131</td>
+                        <td th:text="${pd.supplierInvoice.datef}">15/01/2020</td>
+                        <td th:text="${pd.barcode}">00000121-123131231-1231312</td>
+                        <!--<td>STOCK</td>-->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col-1">
+                <form action="#" id="print_barcodes_form" th:action="@{/products/details/barcodes/report}" target="_blank" th:object="${searchProductsFilter}">
+                    <input type="hidden" th:field="*{pageNumber}"   name="pageNumber"/>
+                    <input type="hidden" th:field="*{barcode}"      name="barcode"/>
+                    <input type="hidden" th:field="*{product}"      name="product"/>
+                    <input type="hidden" th:field="*{creationDate}" name="creationDate"/>
+                    <input type="hidden" th:field="*{supplierCode}" name="supplierCode"/>
+                    <input type="hidden" th:field="*{invoice}" name="invoice"/>
+                    <input type="submit" id="print_barcodes_btn" class="btn btn-primary btn-sm" value="Imprimir"/>
+                </form>
+
+            </div>
+            <div class="col-1">
+                <button id="index_btn" class="btn btn-secondary btn-sm">Salir</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+
+        $('#creation_date').datepicker({
+            language:"es",
+            format: "dd/mm/yyyy",
+            orientation:"bottom right",
+            todayHighlight: true,
+            autoclose: true,
+            locale:"es"
+        });
+
+        $( "#search_products_form" ).submit(function( event ) {
+
+            if($('#barcode').val() != '' ||  $('#product').val() != '' || $('#creation_date').val() != ''
+                || $('#supplier').val() != '' ||$('#invoice').val() != '')
+                return true;
+
+            $('#mgs-alert').addClass('show');
+            event.preventDefault();
+        });
+
+       $('#msg-close-btn').click(function() {
+            $('#mgs-alert').removeClass('show');
+       });
+
+       $('#index_btn').click(function(){
+            document.location.href = '/thc-web/index';
+        });
+
+    })
+</script>
+
+</html>
