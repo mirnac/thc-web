@@ -20,7 +20,7 @@ class ProductServiceTest {
 
     @Test
     void searchProductsDetails() {
-        LocalDate date = LocalDate.of(2020,1,14);
+        LocalDate date = LocalDate.of(2020,2,24);
 
         SearchProductDetailsFilter filter = SearchProductDetailsFilter.builder().creationDate(date).build();
 
