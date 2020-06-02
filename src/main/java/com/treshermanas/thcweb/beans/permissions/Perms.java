@@ -37,5 +37,6 @@ public enum Perms {
     facture,
     supplier_invoice_advance,
     myactions,
-    allactions
+    allactions,
+    statistics
 }

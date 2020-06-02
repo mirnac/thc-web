@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Service
@@ -31,5 +34,17 @@ public class PaymentsServiceImpl implements PaymentsService {
                 .queryParam("date", sdf.format(date));
 
         return restTemplate.getForObject(builder.toUriString(),Resource.class);
+    }
+
+    public BigDecimal getTotalPaidByDate(LocalDate date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+        String url = baseUrl + GET_PAID_BY_DATE_URL;
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .fromUriString(url)
+                .queryParam("date", formatter.format(date));
+
+        return restTemplate.getForObject(builder.toUriString(),BigDecimal.class);
+
     }
 }

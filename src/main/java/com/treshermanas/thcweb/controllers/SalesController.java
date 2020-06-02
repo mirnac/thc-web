@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
@@ -45,4 +46,9 @@ public class SalesController {
 
     }
 
+    @RequestMapping(value = "/total/today")
+    @ResponseBody
+    public BigDecimal getTotalSalesToday(){
+       return salesService.getTotalSalesByDate(LocalDate.now());
+    }
 }

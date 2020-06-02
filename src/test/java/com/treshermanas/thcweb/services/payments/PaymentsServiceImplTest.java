@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -23,5 +25,12 @@ class PaymentsServiceImplTest {
         Resource resource =  paymentsService.getPaymentsReportByDate(sdf.parse("10/01/2020"));
         assertNotNull(resource);
         assertNotNull(resource.getData());
+    }
+
+    @Test
+    void getTotalPaidByDate(){
+        BigDecimal totalPaid = paymentsService.getTotalPaidByDate(LocalDate.now());
+        assertNotNull(totalPaid);
+        System.out.println(totalPaid);
     }
 }

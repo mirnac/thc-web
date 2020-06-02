@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -36,5 +37,18 @@ public class SalesServiceImpl implements SalesService {
 
         return restTemplate.getForObject(builder.toUriString(),Resource.class);
 
+    }
+
+    @Override
+    public BigDecimal getTotalSalesByDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.API_DATE_FORMAT);
+        String url = baseUrl +  GET_TOTAL_SALES_BY_DATE_URL ;
+
+        UriComponents builder = UriComponentsBuilder
+                .fromUriString(url)
+                .queryParam("date", date.format(formatter))
+                .build();
+
+        return restTemplate.getForObject(builder.toUriString(),BigDecimal.class);
     }
 }
