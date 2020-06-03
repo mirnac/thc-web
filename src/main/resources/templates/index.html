@@ -161,20 +161,8 @@
                         </div>
                     </div>
                 </div>
-                <div th:if="${dashboardPerms.get('PRODUCT_STATISTICS')!=null}" class="col-5">
-                    <div id="chart_products" style="width: 300px; height: 250px;display: block; margin: 0 auto">
-
-                    </div>
-                </div>
             </div>
-            <div th:if="${dashboardPerms.get('TOTAL_OVERDUE_CHART')!=null}" class="row">
-                <div class="col-10">
-                    <div id="chart2" style="width: 800px; height: 250px; display: block; margin: 0 auto">
-
-                    </div>
-                </div>
-            </div>
-            <div th:if="${dashboardPerms.get('TOTAL_SALES_MONTHLY_CHART')!=null}" class="row`">
+            <div th:if="${dashboardPerms.get('MONTHLY_PAYMENTS_CHART')!=null}" class="row`">
                 <div class="col-10">
                     <div id="chart3" style="width: 800px; height: 300px; display: block; margin: 0 auto">
 
@@ -199,7 +187,6 @@
     /*<![CDATA[*/
         $(document).ready(function(){
             var showSalesChart =/*[[${dashboardPerms.get('TOTAL_SALES_DAY_CHART')}]]*/ true;
-
             if(showSalesChart){
                 var moneyReceived = /*[[${totalReceived}]]*/ 230000000;
                 var sold = 0;
@@ -245,151 +232,62 @@
         });
     /*]]>*/
 
-    /*google.charts.load('current', {packages: ['corechart', 'line']});
-    google.charts.setOnLoadCallback(drawBasic);
+</script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function(){
 
-    function drawBasic() {
+        function getBaseUrl() {
+            return window.location.href.match(/^.*\//);
+        }
 
-        var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Semana');
-        data.addColumn('number', 'Monto en Mora');
+        var showReceivedVsPaidChart = /*[[${dashboardPerms.get('MONTHLY_PAYMENTS_CHART')}]]*/true;
+        var customerPaymentsSumUrl = getBaseUrl()+'reports/suppliers/payments/summary';
 
-        data.addRows([
-            [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
-            [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
-            [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
-            [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
-            [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
-            [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
-            [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
-            [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
-            [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
-            [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
-            [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
-            [66, 70], [67, 72], [68, 75], [69, 80]
-        ]);
+        if(showReceivedVsPaidChart){
 
-        var options = {
-            hAxis: {
-                title: 'Time'
-            },
-            vAxis: {
-                title: 'Popularity'
-            }
-        };
+            $.get( customerPaymentsSumUrl, function( customersPaymentSummaryData ) {
 
-        var chart = new google.visualization.LineChart(document.getElementById('chart2'));
+                var supplierPaymentsSumUrl = getBaseUrl()+'reports/customers/payments/summary';
+                $.get(supplierPaymentsSumUrl, function (suppliersPaymentsData) {
 
-        chart.draw(data, options);
-    }
+                    google.charts.load('current', {packages: ['corechart', 'bar']});
+                    google.charts.setOnLoadCallback(drawMultSeries);
 
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(drawChart2);
+                    function drawMultSeries() {
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('number', 'Mes');
+                        data.addColumn('number', 'Cobrado');
+                        data.addColumn('number', 'Pagado ');
 
-    // Callback that creates and populates a data table,
-    // instantiates the pie chart, passes in the data and
-    // draws it.
-    function drawChart2() {
+                        var result = [];
+                        for(var i=0; i<=12;i++) {
+                            var customer = customersPaymentSummaryData.length>=i+1? customersPaymentSummaryData[i].amount:0;
+                            var supplier = suppliersPaymentsData.length >= i+1?suppliersPaymentsData[i].amount:0;
+                            result.push([i+1,supplier,customer]);
+                        }
+                        data.addRows(result);
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Producto');
-        data.addColumn('number', 'Cantidad');
-        data.addRows([
-            ['Ventilador', 130],
-            ['Cocina', 210],
-            ['Heladera', 111],
-            ['Centrifuga', 198],
-            ['Licuadora', 298]
-        ]);
+                        var options = {
+                            title: 'Cobros y Pagos por Mes',
+                            hAxis: {
+                                title: 'Mes'
+                            },
+                            vAxis: {
+                                title: 'Monto'
+                            }
+                        };
 
-        // Set chart options
-        var options = {'title':'Productos mas vendidos en el año',
-            'width':400,
-            'height':300};
+                        var chart = new google.visualization.ColumnChart(
+                            document.getElementById('chart3'));
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_products'));
-        chart.draw(data, options);
-    }
-
-    google.charts.load('current', {packages: ['corechart', 'line']});
-    google.charts.setOnLoadCallback(drawBasic);
-
-    function drawBasic() {
-
-        var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Semana');
-        data.addColumn('number', 'Total en Mora');
-
-        data.addRows([
-            [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
-            [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
-            [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
-            [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
-            [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
-            [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
-            [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
-            [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
-            [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
-            [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
-            [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
-            [66, 70], [67, 72], [68, 75], [69, 80]
-        ]);
-
-        var options = {
-            hAxis: {
-                title: 'Semana'
-            },
-            vAxis: {
-                title: 'Monto Total en Mora'
-            }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('chart2'));
-
-        chart.draw(data, options);
-    }
-
-    google.charts.load('current', {packages: ['corechart', 'bar']});
-    google.charts.setOnLoadCallback(drawMultSeries);
-
-    function drawMultSeries() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Mes');
-        data.addColumn('number', 'Cobrado');
-        data.addColumn('number', 'Pagado ');
-
-        data.addRows([
-            [1, 100000000, 50000000],
-            [2, 300000000, 200000000],
-            [3, 450000000, 360000000],
-            [4, 450000000, 400000000],
-            [5, 500000000, 200000000],
-            [6, 450000000, 300000000],
-            [7, 800000000, 400323020],
-            [8, 500000000, 439000000],
-            [9, 600000000, 570000000],
-            [10,900000000, 239000000],
-            [11,878900000, 100000000],
-            [12,980000000, 310000000],
-        ]);
-
-        var options = {
-            title: 'Cobros y Pagos por Mes',
-            hAxis: {
-                title: 'Mes'
-            },
-            vAxis: {
-                title: 'Monto'
-            }
-        };
-
-        var chart = new google.visualization.ColumnChart(
-            document.getElementById('chart3'));
-
-        chart.draw(data, options);
-    }*/
+                        chart.draw(data, options);
+                    }
+                });
+            });
+        }
+    });
+    /*]]>*/
 </script>
 </body>
 </html>

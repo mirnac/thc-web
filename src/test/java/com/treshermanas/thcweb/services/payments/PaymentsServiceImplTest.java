@@ -1,6 +1,7 @@
 package com.treshermanas.thcweb.services.payments;
 
 import com.treshermanas.thcweb.services.dto.Resource;
+import com.treshermanas.thcweb.services.payments.customers.PaymentsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

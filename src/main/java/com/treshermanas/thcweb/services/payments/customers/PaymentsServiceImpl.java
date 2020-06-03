@@ -1,8 +1,11 @@
-package com.treshermanas.thcweb.services.payments;
+package com.treshermanas.thcweb.services.payments.customers;
 
+import com.treshermanas.thcweb.reports.AmountSummary;
 import com.treshermanas.thcweb.services.dto.Resource;
 import com.treshermanas.thcweb.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -12,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PaymentsServiceImpl implements PaymentsService {
@@ -37,8 +41,8 @@ public class PaymentsServiceImpl implements PaymentsService {
     }
 
     public BigDecimal getTotalPaidByDate(LocalDate date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String url = baseUrl + GET_PAID_BY_DATE_URL;
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString(url)
@@ -46,5 +50,15 @@ public class PaymentsServiceImpl implements PaymentsService {
 
         return restTemplate.getForObject(builder.toUriString(),BigDecimal.class);
 
+    }
+
+    @Override
+    public List<AmountSummary> getCustomersPaymentByMonth() {
+
+        String url = baseUrl + GET_PAYMENT_SUMMARY_URL;
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .fromUriString(url);
+
+        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET,null,new ParameterizedTypeReference<List<AmountSummary>>(){}).getBody();
     }
 }

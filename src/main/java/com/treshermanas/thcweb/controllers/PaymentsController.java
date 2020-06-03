@@ -3,7 +3,7 @@ package com.treshermanas.thcweb.controllers;
 import com.treshermanas.thcweb.exception.DataNotFoundException;
 import com.treshermanas.thcweb.exception.ThcServiceException;
 import com.treshermanas.thcweb.services.dto.Resource;
-import com.treshermanas.thcweb.services.payments.PaymentsService;
+import com.treshermanas.thcweb.services.payments.customers.PaymentsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

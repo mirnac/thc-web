@@ -1,7 +1,7 @@
 package com.treshermanas.thcweb.controllers;
 
 import com.treshermanas.thcweb.constants.DashBoardPerms;
-import com.treshermanas.thcweb.services.payments.PaymentsService;
+import com.treshermanas.thcweb.services.payments.customers.PaymentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +25,7 @@ public class DashboardController {
 
         dashboardViewsPerms.put(DashBoardPerms.TOTAL_RECEIVED_AMOUNT.name(), Boolean.TRUE);
         dashboardViewsPerms.put(DashBoardPerms.TOTAL_SALES_DAY_CHART.name(), Boolean.TRUE);
+        dashboardViewsPerms.put(DashBoardPerms.MONTHLY_PAYMENTS_CHART.name(), Boolean.TRUE);
 
         model.addAttribute("dashboardPerms",dashboardViewsPerms);
         model.addAttribute("totalReceived",paymentsService.getTotalPaidByDate(LocalDate.now()));
