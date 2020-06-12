@@ -1,6 +1,6 @@
 package com.treshermanas.thcweb.services.payments.customers;
 
-import com.treshermanas.thcweb.reports.AmountSummary;
+import com.treshermanas.thcweb.beans.DataElement;
 import com.treshermanas.thcweb.services.dto.Resource;
 import com.treshermanas.thcweb.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,12 +53,12 @@ public class PaymentsServiceImpl implements PaymentsService {
     }
 
     @Override
-    public List<AmountSummary> getCustomersPaymentByMonth() {
+    public List<DataElement> getCustomersPaymentByMonth() {
 
         String url = baseUrl + GET_PAYMENT_SUMMARY_URL;
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString(url);
 
-        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET,null,new ParameterizedTypeReference<List<AmountSummary>>(){}).getBody();
+        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET,null,new ParameterizedTypeReference<List<DataElement>>(){}).getBody();
     }
 }

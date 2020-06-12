@@ -23,8 +23,8 @@ public class DashboardController {
 
         Map<String,Boolean> dashboardViewsPerms = new HashMap<>();
 
-        dashboardViewsPerms.put(DashBoardPerms.TOTAL_RECEIVED_AMOUNT.name(), Boolean.TRUE);
-        dashboardViewsPerms.put(DashBoardPerms.TOTAL_SALES_DAY_CHART.name(), Boolean.TRUE);
+        dashboardViewsPerms.put(DashBoardPerms.TOTAL_RECEIVED_AMOUNT.name(),  Boolean.TRUE);
+        dashboardViewsPerms.put(DashBoardPerms.TOTAL_SALES_DAY_CHART.name(),  Boolean.TRUE);
         dashboardViewsPerms.put(DashBoardPerms.MONTHLY_PAYMENTS_CHART.name(), Boolean.TRUE);
 
         model.addAttribute("dashboardPerms",dashboardViewsPerms);

@@ -1,6 +1,6 @@
 package com.treshermanas.thcweb.services.payments.suppliers;
 
-import com.treshermanas.thcweb.reports.AmountSummary;
+import com.treshermanas.thcweb.beans.DataElement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -22,14 +22,14 @@ public class SupplierPaymentsServiceImpl implements  SupplierPaymentsService {
     }
 
     @Override
-    public List<AmountSummary> getMonthlyAmountPaymentSummary() {
+    public List<DataElement> getMonthlyAmountPaymentSummary() {
         String url = baseUrl + GET_PAYMENT_SUMMARY_URL;
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString(url);
 
         return restTemplate.exchange(url,
                                             HttpMethod.GET,null,
-                                                new ParameterizedTypeReference<List<AmountSummary>>(){}).getBody();
+                                                new ParameterizedTypeReference<List<DataElement>>(){}).getBody();
     }
 
 }

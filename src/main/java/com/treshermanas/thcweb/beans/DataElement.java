@@ -1,13 +1,13 @@
-package com.treshermanas.thcweb.reports;
+package com.treshermanas.thcweb.beans;
 
 import java.math.BigDecimal;
 
-public class AmountSummary {
+public class DataElement {
 
     private Integer number;
     private BigDecimal amount;
 
-    public AmountSummary(){
+    public DataElement(){
 
     }
 

@@ -1,6 +1,6 @@
 package com.treshermanas.thcweb.controllers;
 
-import com.treshermanas.thcweb.reports.AmountSummary;
+import com.treshermanas.thcweb.beans.DataElement;
 import com.treshermanas.thcweb.services.payments.customers.PaymentsService;
 import com.treshermanas.thcweb.services.payments.suppliers.SupplierPaymentsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,13 @@ public class ReportsController {
 
     @RequestMapping(value = "/customers/payments/summary", method = RequestMethod.GET)
     @ResponseBody
-    public List<AmountSummary> getMonthlyAmountPaidByCustomersSummary(){
+    public List<DataElement> getMonthlyAmountPaidByCustomersSummary(){
         return paymentsService.getCustomersPaymentByMonth();
     }
 
     @RequestMapping(value = "/suppliers/payments/summary",method = RequestMethod.GET)
     @ResponseBody
-    public List<AmountSummary> getMonthlyAmountPaidToSuppliers(){
+    public List<DataElement> getMonthlyAmountPaidToSuppliers(){
         return supplierPaymentsService.getMonthlyAmountPaymentSummary();
     }
 }

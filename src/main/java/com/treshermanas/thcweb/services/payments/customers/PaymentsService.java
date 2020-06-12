@@ -1,6 +1,6 @@
 package com.treshermanas.thcweb.services.payments.customers;
 
-import com.treshermanas.thcweb.reports.AmountSummary;
+import com.treshermanas.thcweb.beans.DataElement;
 import com.treshermanas.thcweb.services.dto.Resource;
 
 import java.math.BigDecimal;
@@ -16,5 +16,5 @@ public interface PaymentsService {
 
     Resource getPaymentsReportByDate(Date date);
     BigDecimal getTotalPaidByDate(LocalDate date);
-    List<AmountSummary> getCustomersPaymentByMonth();
+    List<DataElement> getCustomersPaymentByMonth();
 }

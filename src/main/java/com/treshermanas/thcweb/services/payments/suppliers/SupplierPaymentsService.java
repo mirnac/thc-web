@@ -1,6 +1,6 @@
 package com.treshermanas.thcweb.services.payments.suppliers;
 
-import com.treshermanas.thcweb.reports.AmountSummary;
+import com.treshermanas.thcweb.beans.DataElement;
 
 import java.util.List;
 
@@ -8,5 +8,5 @@ import java.util.List;
 public interface SupplierPaymentsService {
 
     String GET_PAYMENT_SUMMARY_URL = "/suppliers/payments/summary";
-    List<AmountSummary> getMonthlyAmountPaymentSummary();
+    List<DataElement> getMonthlyAmountPaymentSummary();
 }

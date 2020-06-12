@@ -18,133 +18,7 @@
 <header th:insert="fragments.html :: header"></header>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-3 p-0">
-            <div id="accordion" class="accordion">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link thc-color" type="button" data-toggle="collapse"
-                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                1. Ventas
-                            </button>
-                        </h2>
-                    </div>
-
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="card-body pt-1 pb-1">
-
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="#" class="list-group-item list-group-item-action"
-                                                               th:href="@{/payments/report/go}">Cierre Ventas</a></li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header" id="headingTwo">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link thc-color" type="button" data-toggle="collapse"
-                                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                2. Stock e Inventarios
-                            </button>
-                        </h2>
-                    </div>
-
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="card-body pt-1 pb-1">
-
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="#" class="list-group-item list-group-item-action"
-                                                               th:href="@{/stock/stock_verification}">Verificar Stock</a></li>
-
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link thc-color" type="button" data-toggle="collapse"
-                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                3. Productos
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                        <div class="card-body pt-1 pb-1">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="#" class="list-group-item list-group-item-action"
-                                                               th:href="@{/products/details/search/init}">Buscar Productos</a>
-                                </li>
-                                <li class="list-group-item"><a href="#" class="list-group-item list-group-item-action"
-                                                               th:href="@{/reparacion/tablero}">Ver Productos en Reparación </a>
-                                </li>
-                                <li class="list-group-item"><a href="#" class="list-group-item list-group-item-action"
-                                                               th:href="@{/pedidos/tablero}">Ver Pedidos </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingFour">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link thc-color" type="button" data-toggle="collapse"
-                                    data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                4. Cobranzas
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                        <div class="card-body pt-1 pb-1">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="#" class="list-group-item list-group-item-action"
-                                                               th:href="@{/invoices/unpaid/report/go}">Ventas sin Entrega</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingFive">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link thc-color" type="button" data-toggle="collapse"
-                                    data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                5. Proveedores
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                        <div class="card-body pt-1 pb-1">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="#" class="list-group-item list-group-item-action"
-                                                               th:href="@{/invoices/unpaid/report/go}">Ventas sin Entrega</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingSix">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link thc-color" type="button" data-toggle="collapse"
-                                    data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                6. Reportes
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
-                        <div class="card-body pt-1 pb-1">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="#" class="list-group-item list-group-item-action"
-                                                               th:href="@{/invoices/unpaid/report/go}">Ventas sin Entrega</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-12 col-md-3 p-0" th:insert="fragments.html :: menu">
         </div>
         <div class="col">
             <div class="row text-center justify-content-center">
@@ -192,42 +66,43 @@
                 var sold = 0;
                 var url = getBaseUrl()+"sales/total/today";
                 $.get( url, function( data ) {
-                    sold = data;
-                    // Load the Visualization API and the corechart package.
-                    google.charts.load('current', {'packages':['corechart']});
-                    // Set a callback to run when the Google Visualization API is loaded.
-                    google.charts.setOnLoadCallback(drawChart);
+                    sold = data
 
-                    // Callback that creates and populates a data table,
-                    // instantiates the pie chart, passes in the data and
-                    // draws it.
-                    function drawChart() {
+                }).always( function () {
 
-                        // Create the data table.
-                        var data = new google.visualization.DataTable();
-                        data.addColumn('string', 'Cobrado');
-                        data.addColumn('number', 'Vendido');
-                        data.addRows([
-                            ['Cobrado', moneyReceived],
-                            ['Vendido', sold]
-                        ]);
+                        // Load the Visualization API and the corechart package.
+                        google.charts.load('current', {'packages':['corechart']});
+                        // Set a callback to run when the Google Visualization API is loaded.
+                        google.charts.setOnLoadCallback(drawChart);
 
-                        var title = 'Cobrado/Vendido ' + /*[[${#dates.format(#dates.createToday(), 'dd/MM/yyyy ')}]]*/'';
-                        // Set chart options
-                        var options = {'title':title,
-                            'width':400,
-                            'height':300};
+                        // Callback that creates and populates a data table,
+                        // instantiates the pie chart, passes in the data and
+                        // draws it.
 
-                        // Instantiate and draw our chart, passing in some options.
-                        var chart = new google.visualization.PieChart(document.getElementById('chart_sales'));
-                        chart.draw(data, options);
-                    }
+                        function drawChart() {
 
+                            // Create the data table.
+                            var data = new google.visualization.DataTable();
+                            data.addColumn('string', 'Cobrado');
+                            data.addColumn('number', 'Vendido');
+                            data.addRows([
+                                ['Cobrado', moneyReceived],
+                                ['Vendido', sold]
+                            ]);
+
+                            var title = 'Cobrado/Vendido ' + /*[[${#dates.format(#dates.createToday(), 'dd/MM/yyyy ')}]]*/'';
+                            // Set chart options
+                            var options = {
+                                'title': title,
+                                'width': 400,
+                                'height': 300
+                            };
+
+                            // Instantiate and draw our chart, passing in some options.
+                            var chart = new google.visualization.PieChart(document.getElementById('chart_sales'));
+                            chart.draw(data, options);
+                        }
                 });
-            }
-
-            function getBaseUrl() {
-                return window.location.href.match(/^.*\//);
             }
         });
     /*]]>*/
@@ -236,10 +111,6 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     $(document).ready(function(){
-
-        function getBaseUrl() {
-            return window.location.href.match(/^.*\//);
-        }
 
         var showReceivedVsPaidChart = /*[[${dashboardPerms.get('MONTHLY_PAYMENTS_CHART')}]]*/true;
         var customerPaymentsSumUrl = getBaseUrl()+'reports/suppliers/payments/summary';
@@ -256,7 +127,7 @@
 
                     function drawMultSeries() {
                         var data = new google.visualization.DataTable();
-                        data.addColumn('number', 'Mes');
+                        data.addColumn('string', 'Mes');
                         data.addColumn('number', 'Cobro a Clientes');
                         data.addColumn('number', 'Pago a Proveedores ');
 
@@ -264,7 +135,7 @@
                         for(var i=0; i<=12;i++) {
                             var customer = customersPaymentSummaryData.length>=i+1? customersPaymentSummaryData[i].amount:0;
                             var supplier = suppliersPaymentsData.length >= i+1?suppliersPaymentsData[i].amount:0;
-                            result.push([i+1,supplier,customer]);
+                            result.push([months[i],supplier,customer]);
                         }
                         data.addRows(result);
 
