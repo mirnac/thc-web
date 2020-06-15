@@ -1,7 +1,9 @@
 package com.treshermanas.thcweb.controllers;
 
 import com.treshermanas.thcweb.beans.interventions.InterventionDataElement;
+import com.treshermanas.thcweb.beans.invoice.customers.OverdueSummary;
 import com.treshermanas.thcweb.services.collections.interventions.InterventionService;
+import com.treshermanas.thcweb.services.invoices.InvoicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -20,6 +23,8 @@ public class CollectionsStatisticsController {
 
     @Autowired
     private InterventionService interventionService;
+    @Autowired
+    private InvoicesService invoicesService;
 
     @RequestMapping(value={"/",""}, method = RequestMethod.GET)
     public String gotoStatisticsPage(Model model){
@@ -44,4 +49,11 @@ public class CollectionsStatisticsController {
         LocalDate currentDate = LocalDate.now();
         return interventionService.getYearInterventionsSummary(currentDate.getYear()).getDataMap();
     }
+
+    @RequestMapping(value = "/overdue/summary", method = RequestMethod.GET)
+    @ResponseBody
+    public List<OverdueSummary> geOverdueSummary(){
+        return invoicesService.getOverdueInvoicesAmountSummary();
+    }
+
 }

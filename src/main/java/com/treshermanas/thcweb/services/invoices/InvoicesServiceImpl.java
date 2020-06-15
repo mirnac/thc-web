@@ -1,18 +1,24 @@
 package com.treshermanas.thcweb.services.invoices;
 
 import com.treshermanas.thcweb.backingbeans.invoices.customer.Invoice;
+import com.treshermanas.thcweb.beans.DataSummary;
+import com.treshermanas.thcweb.beans.interventions.InterventionDataElement;
+import com.treshermanas.thcweb.beans.invoice.customers.OverdueSummary;
 import com.treshermanas.thcweb.exception.ThcServiceException;
 import com.treshermanas.thcweb.services.dto.Resource;
 import com.treshermanas.thcweb.services.dto.invoices.InvoiceDto;
 import com.treshermanas.thcweb.utils.DateUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.text.ParseException;
+import java.util.List;
 
 @Service
 public class InvoicesServiceImpl implements InvoicesService {
@@ -68,6 +74,17 @@ public class InvoicesServiceImpl implements InvoicesService {
         InvoiceDto invoiceDto =  restTemplate.getForObject(builder.toUriString(),InvoiceDto.class);
 
         return modelMapper.map(invoiceDto,Invoice.class);
+    }
+
+    @Override
+    public List<OverdueSummary> getOverdueInvoicesAmountSummary() {
+        String url = baseUrl + GET_OVERDUE_SUMMARY_URL;
+        UriComponents builder = UriComponentsBuilder
+                .fromUriString(url)
+                .build();
+
+        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<OverdueSummary>>() {}).getBody();
     }
 
 }
