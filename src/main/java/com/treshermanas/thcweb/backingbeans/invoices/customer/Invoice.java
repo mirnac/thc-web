@@ -2,11 +2,18 @@ package com.treshermanas.thcweb.backingbeans.invoices.customer;
 
 import com.treshermanas.thcweb.beans.thirdperson.ThirdPerson;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 public class Invoice {
 
     private Integer id;
     private String facNumber;
-    private ThirdPerson thirdPerson;
+    private ThirdPerson customer;
+    private BigDecimal overduePenalty;
+    private LocalDate lastPaymentDate;
+    private LocalDate dueDate;
+    private BigDecimal pendingBalance;
     private PaymentTerm paymentTerm;
 
     public Invoice(){
@@ -29,12 +36,12 @@ public class Invoice {
         this.facNumber = facNumber;
     }
 
-    public ThirdPerson getThirdPerson() {
-        return thirdPerson;
+    public ThirdPerson getCustomer() {
+        return customer;
     }
 
-    public void setThirdPerson(ThirdPerson thirdPerson) {
-        this.thirdPerson = thirdPerson;
+    public void setCustomer(ThirdPerson customer) {
+        this.customer = customer;
     }
 
     public PaymentTerm getPaymentTerm() {
@@ -43,5 +50,37 @@ public class Invoice {
 
     public void setPaymentTerm(PaymentTerm paymentTerm) {
         this.paymentTerm = paymentTerm;
+    }
+
+    public BigDecimal getOverduePenalty() {
+        return overduePenalty;
+    }
+
+    public void setOverduePenalty(BigDecimal overduePenalty) {
+        this.overduePenalty = overduePenalty;
+    }
+
+    public LocalDate getLastPaymentDate() {
+        return lastPaymentDate;
+    }
+
+    public void setLastPaymentDate(LocalDate lastPaymentDate) {
+        this.lastPaymentDate = lastPaymentDate;
+    }
+
+    public BigDecimal getPendingBalance() {
+        return pendingBalance;
+    }
+
+    public void setPendingBalance(BigDecimal pendingBalance) {
+        this.pendingBalance = pendingBalance;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 }

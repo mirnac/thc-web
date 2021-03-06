@@ -101,6 +101,7 @@ public class StockVerificationController {
     public List<Warehouse> populateWarehouses() {
         List<Warehouse> list = new ArrayList<>();
         list.add(new Warehouse(1, "DepositoProductos"));
+        list.add(new Warehouse(2, "YSYPOYU"));
         return list;
     }
 }

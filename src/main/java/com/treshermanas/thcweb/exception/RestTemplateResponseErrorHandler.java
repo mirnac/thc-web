@@ -58,7 +58,6 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
         } else if (clientHttpResponse.getStatusCode()
                 .series() == HttpStatus.Series.SERVER_ERROR) {
             throw new ThcServiceException(errorMessage);
-
         } else if (clientHttpResponse.getStatusCode()
                 .series() == HttpStatus.Series.CLIENT_ERROR) {
             throw new ThcServiceException(errorMessage);

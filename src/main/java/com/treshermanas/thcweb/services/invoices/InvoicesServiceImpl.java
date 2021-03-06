@@ -1,14 +1,15 @@
 package com.treshermanas.thcweb.services.invoices;
 
 import com.treshermanas.thcweb.backingbeans.invoices.customer.Invoice;
-import com.treshermanas.thcweb.beans.DataSummary;
-import com.treshermanas.thcweb.beans.interventions.InterventionDataElement;
+import com.treshermanas.thcweb.backingbeans.invoices.customer.SearchOverdueInvoiceFilter;
 import com.treshermanas.thcweb.beans.invoice.customers.OverdueSummary;
 import com.treshermanas.thcweb.exception.ThcServiceException;
+import com.treshermanas.thcweb.services.dto.PageDto;
 import com.treshermanas.thcweb.services.dto.Resource;
 import com.treshermanas.thcweb.services.dto.invoices.InvoiceDto;
 import com.treshermanas.thcweb.utils.DateUtils;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -18,6 +19,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -85,6 +87,63 @@ public class InvoicesServiceImpl implements InvoicesService {
 
         return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<OverdueSummary>>() {}).getBody();
+    }
+
+    @Override
+    public PageDto<Invoice> getOverdueInvoices(SearchOverdueInvoiceFilter filter) {
+
+        String url = baseUrl + GET_OVERDUE_INVOICES;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.API_DATE_FORMAT);
+
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .fromUriString(url);
+
+        builder.queryParam("day", filter.getDay());
+        builder.queryParam("page", filter.getPage());
+        builder.queryParam("size", filter.getPageSize());
+
+        if(filter.getFromDate() != null)
+            builder.queryParam("from", formatter.format(filter.getFromDate()));
+
+        if(filter.getUntilDate() != null)
+            builder.queryParam("until",formatter.format(filter.getUntilDate()));
+
+        PageDto<InvoiceDto> invoiceDtoPageDto =  restTemplate.exchange(builder.toUriString(), HttpMethod.GET,
+                null, new ParameterizedTypeReference<PageDto<InvoiceDto>>() {
+                }).getBody();
+
+        java.lang.reflect.Type type = new TypeToken<List<Invoice>>() {}.getType();
+
+
+        PageDto<Invoice> invoicesPage = new PageDto<>(invoiceDtoPageDto.getNumber(),invoiceDtoPageDto.getPageSize());
+        invoicesPage.setTotalPagesCount(invoiceDtoPageDto.getTotalPagesCount());
+        invoicesPage.setData(
+                modelMapper.map(invoiceDtoPageDto.getData(),type)
+        );
+        return invoicesPage;
+    }
+
+    @Override
+    public PageDto<Invoice> getOverdueInvoicesReport(SearchOverdueInvoiceFilter filter) {
+
+        String url = baseUrl + GET_OVERDUE_INVOICES_REPORT;
+
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .fromUriString(url);
+
+        builder.queryParam("day", filter.getDay());
+        builder.queryParam("page", filter.getPage());
+        builder.queryParam("size", filter.getPageSize());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.API_DATE_FORMAT);
+        if(filter.getFromDate() != null)
+            builder.queryParam("from", formatter.format(filter.getFromDate()));
+
+        if(filter.getUntilDate() != null)
+            builder.queryParam("until",formatter.format(filter.getUntilDate()));
+
+        return null;
+
     }
 
 }
