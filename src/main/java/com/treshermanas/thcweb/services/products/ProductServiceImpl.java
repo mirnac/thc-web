@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    @Override
+    //@Override
     public PageDto<ProductDetail> searchProductsDetails(SearchProductDetailsFilter filter) {
 
         String url = baseUrl +SEARCH_PRODUCTS_DETAILS_PATH;

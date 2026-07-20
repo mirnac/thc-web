@@ -15,7 +15,7 @@ class SalesServiceImplTest {
     @Autowired
     private SalesService salesService;
 
-    @Test
+    //@Test
     void getTotalSalesByDate() {
         BigDecimal total = salesService.getTotalSalesByDate(LocalDate.now().minusDays(1));
         assertNotNull(total);

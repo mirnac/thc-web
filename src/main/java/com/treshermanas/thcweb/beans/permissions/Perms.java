@@ -38,5 +38,12 @@ public enum Perms {
     supplier_invoice_advance,
     myactions,
     allactions,
-    statistics
+    statistics,
+    cotisation,
+    define_holiday,
+    delete,
+    lire_tous,
+    month_report,
+    view_log,
+    write
 }

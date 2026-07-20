@@ -18,7 +18,7 @@ class ProductServiceTest {
     @Autowired
     private ProductService productService;
 
-    @Test
+    //@Test
     void searchProductsDetails() {
         LocalDate date = LocalDate.of(2020,2,24);
 

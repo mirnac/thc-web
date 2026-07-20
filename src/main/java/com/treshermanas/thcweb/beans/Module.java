@@ -19,5 +19,8 @@ public enum Module {
     stock,
     fournisseur,
     export,
+    holiday,
+    adherent,
+    barcode,
     agenda;
 }

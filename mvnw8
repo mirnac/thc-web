@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Run the Maven wrapper with Java 8 (Amazon Corretto 8) regardless of the
+# machine's default java. This project targets Java 1.8; the main JDK here is 17/21.
+# Usage: ./mvnw8 clean package   |   ./mvnw8 spring-boot:run   |   ./mvnw8 test
+set -e
+JAVA8_HOME="$(/usr/libexec/java_home -v 1.8 2>/dev/null)"
+if [ -z "$JAVA8_HOME" ]; then
+  echo "Java 8 not found. Install it (e.g. 'brew install --cask corretto8') and retry." >&2
+  exit 1
+fi
+export JAVA_HOME="$JAVA8_HOME"
+exec "$(dirname "$0")/mvnw" "$@"
